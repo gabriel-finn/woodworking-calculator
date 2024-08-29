@@ -1,0 +1,15 @@
+{
+    "materials": {
+        "Pine Wood": 5.50,
+        "Oak Wood": 8.25,
+        "Birch Wood": 7.00
+    },
+    "labor_rates": {
+        "standard_rate": 20.00,
+        "expert_rate": 35.00
+    },
+    "overhead_costs": {
+        "electricity": 15.00,
+        "tool_wear": 10.00
+    }
+}
