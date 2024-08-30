@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import json
 
-def loadSettings(filepath):
+def loadSettings(filepath:str=None):
     try:
         with open(filepath, 'r') as json_file:
             data = json.load(json_file)

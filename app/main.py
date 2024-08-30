@@ -30,7 +30,7 @@ class Menu(ctk.CTkFrame):
             pass
 
         self.mat_type = ctk.CTkComboBox(self, 
-                                     values=["Pine", "Oak", "Birch"],
+                                     values=["Pine Wood", "Oak Wood", "Birch Wood"],
                                      command=combobox_callback)
         
         self.mat_type.grid(column=1, row=1, sticky="")
@@ -43,12 +43,12 @@ class Menu(ctk.CTkFrame):
         self.profit_margin = ctk.CTkEntry(self, placeholder_text="Profit Margin (%)")
         self.profit_margin.grid(pady=15, column=1, row=2, sticky="s")
 
-        price_data = [
-            self.mat_quantity.get(),
-            self.hours_worked.get(),
-            self.profit_margin.get()]
-
         def btnEvnt() -> None:
+            price_data = [
+                self.mat_type.get(),
+                self.mat_quantity.get(),
+                self.hours_worked.get(),
+                self.profit_margin.get()]
             print(calculate.calculate(price_data))
 
 
@@ -61,7 +61,6 @@ class Menu(ctk.CTkFrame):
         self.calc_btn = ctk.CTkButton(self, text="Calculate Price", command=btnEvnt)
         self.calc_btn.grid(pady=15, column=1, row=4, sticky="n")
 
-        # Make sure to expand the main frame
         self.pack(expand=True, fill="both")
 
 App()
