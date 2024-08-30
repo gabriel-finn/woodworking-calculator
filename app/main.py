@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from tkinter import PhotoImage
+from PIL import Image, ImageTk
 
 from calc import calculate
 
@@ -20,15 +21,16 @@ class Menu(ctk.CTkFrame):
         super().__init__(master)
 
         self.grid_rowconfigure((0,1,2,3,4), weight=1)
-        self.grid_columnconfigure((0,1,2,), weight=1)
+        self.grid_columnconfigure((0,1,2), weight=1)
 
-        self.title = ctk.CTkLabel(self, text="Woodworker", bg_color="transparent")
+        self.title = ctk.CTkLabel(self, text="Woodworker", font=("Arial",32), bg_color="transparent")
         self.title.grid(column=1, row=0, sticky="")
 
-        def combobox_callback(choice):
-            print("combobox dropdown clicked:", choice)
+        def combobox_callback(choice) -> None:
+            pass
 
-        self.mat_type = ctk.CTkComboBox(self, values=["option 1", "option 2"],
+        self.mat_type = ctk.CTkComboBox(self, 
+                                     values=["Pine", "Oak", "Birch"],
                                      command=combobox_callback)
         
         self.mat_type.grid(column=1, row=1, sticky="")
@@ -41,10 +43,23 @@ class Menu(ctk.CTkFrame):
         self.profit_margin = ctk.CTkEntry(self, placeholder_text="Profit Margin (%)")
         self.profit_margin.grid(pady=15, column=1, row=2, sticky="s")
 
+        price_data = [
+            self.mat_quantity.get(),
+            self.hours_worked.get(),
+            self.profit_margin.get()]
+
         def btnEvnt() -> None:
-            calculate.calculate(None)
-        self.calc_button = ctk.CTkButton(self, text="Calculate Price", command=btnEvnt)
-        self.calc_button.grid(pady=15, column=1, row=4, sticky="n")
+            print(calculate.calculate(price_data))
+
+
+        """img = Image.open("app/assets/cog.png")
+        img = img.resize((32, 32))
+        cog_image = ImageTk.PhotoImage(img)
+        self.settings_btn = ctk.CTkButton(self, width=32, image=cog_image, text="", fg_color="red", command=btnEvnt)
+        self.settings_btn.grid(ipadx=3, ipady=3, column=0, row=0, sticky="nw",)"""
+
+        self.calc_btn = ctk.CTkButton(self, text="Calculate Price", command=btnEvnt)
+        self.calc_btn.grid(pady=15, column=1, row=4, sticky="n")
 
         # Make sure to expand the main frame
         self.pack(expand=True, fill="both")
